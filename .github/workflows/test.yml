@@ -1,0 +1,35 @@
+name: Deploy Project
+on: [push, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying ..."
+# chúng ta cần bước download code: Vì tất cả các job của workflow sử  dụng các máy chủ khác nhau
+# sử dụng các action đã có sẵn như actions/checkout@v3 , install nodejs kết hợp với từ khóa with để lấy chính xác thông tin
+# needs để chỉ định thứ tự thực hiện các job, ví dụ jobs deploy cần phải chạy sau jobs test
