@@ -31,5 +31,5 @@ jobs:
       - name: Deploy
         run: echo "Deploying ..."
 # chúng ta cần bước download code: Vì tất cả các job của workflow sử  dụng các máy chủ khác nhau
-# sử dụng các action đã có sẵn như actions/checkout@v3 , install nodejs kết hợp với từ khóa with để lấy chính xác thông tin
+# sử dụng các action đã có sẵn như actions/checkout@v3 , install nodejs , giải nén package kết hợp với từ khóa with để lấy chính xác thông tin version
 # needs để chỉ định thứ tự thực hiện các job, ví dụ jobs deploy cần phải chạy sau jobs test
